@@ -20,3 +20,16 @@ type Destination struct {
 	CurrencyName   string `bson:"currency_name"  validate:"required"`
 	CurrencySymbol string `bson:"currency_symbol"  validate:"required"`
 }
+
+type State struct {
+	StateName     string `bson:"state_name"  validate:"required"`
+	StateLanguage string `bson:"state_language"  validate:"required"`
+}
+
+type City struct {
+	CityName string `bson:"city_name"  validate:"required"`
+}
+
+type Locality struct {
+	LocalityName string `bson:"locality_name"  validate:"required"`
+}

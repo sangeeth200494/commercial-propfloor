@@ -35,6 +35,7 @@ func SaveBasicBuildingDetails() gin.HandlerFunc {
 		overlooking := c.PostForm("overlooking")
 
 		InsertBasicBuildingDetailInDB(name, location, availablity_for, completion_status, furnishing_status, no_of_floor, parking, oc, lift, overlooking)
+
 	}
 }
 
@@ -46,7 +47,8 @@ func InsertBasicBuildingDetailInDB(name string, location string, availablity_for
 	doc := models.Property{Name: name, Location: location, AvailabilityFor: availablity_for, CompletionStatus: completion_status,
 		FurnishingStatus: furnishing_status, Floors: no_of_floor, Parking: parking, Oc: oc, Lift: lift, OverLooking: overlooking}
 
-	pattern := regexp.MustCompile("^[A-Za-z]$")
+	pattern := regexp.MustCompile("^[A-Za-z]*$")
+	pattern2 := regexp.MustCompile("^[1-9][0-9]*$")
 
 	validate := validator.New()
 	err := validate.Struct(doc)
@@ -58,7 +60,7 @@ func InsertBasicBuildingDetailInDB(name string, location string, availablity_for
 			fmt.Println("ankit")
 		}
 
-	} else if pattern.MatchString(doc.Name) && pattern.MatchString(doc.Location) && pattern.MatchString(doc.AvailabilityFor) && pattern.MatchString(doc.CompletionStatus) && pattern.MatchString(doc.FurnishingStatus) && pattern.MatchString(doc.Floors) && pattern.MatchString(doc.Parking) && pattern.MatchString(doc.Oc) && pattern.MatchString(doc.Lift) && pattern.MatchString(doc.OverLooking) {
+	} else if pattern.MatchString(doc.Name) && pattern.MatchString(doc.Location) && pattern.MatchString(doc.AvailabilityFor) && pattern.MatchString(doc.CompletionStatus) && pattern.MatchString(doc.FurnishingStatus) && pattern.MatchString(doc.Parking) && pattern.MatchString(doc.Oc) && pattern.MatchString(doc.Lift) && pattern.MatchString(doc.OverLooking) && pattern2.MatchString(doc.Floors) {
 		res, errr := collection.InsertOne(context.Background(), doc)
 		if errr != nil {
 			log.Fatal(errr)
@@ -66,8 +68,10 @@ func InsertBasicBuildingDetailInDB(name string, location string, availablity_for
 		idd := res.InsertedID
 		fmt.Println("datatype", reflect.TypeOf(idd))
 		fmt.Println("inserted-cityid  ", idd)
-
+	} else {
+		fmt.Println("invalid input")
 	}
+
 	fmt.Println(os.Getenv("APP_NAME"))
 	return
 }
