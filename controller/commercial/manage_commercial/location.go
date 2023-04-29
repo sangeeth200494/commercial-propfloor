@@ -1,10 +1,12 @@
 package manage_commercial
 
 import (
+	"commercial-propfloor/controller"
 	"commercial-propfloor/database"
 	"commercial-propfloor/models"
 	"context"
 	"fmt"
+
 	"log"
 	"os"
 	"reflect"
@@ -21,7 +23,8 @@ func AddCountryDetails() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
 		//fmt.Println("ankit")
-		country_name := c.PostForm("country_name")
+		country_name := c.PostForm("country_name") // taking input from user
+
 		currency_name := c.PostForm("currency_name")
 		currency_symbol := c.PostForm("currency_symbol")
 
@@ -33,41 +36,50 @@ func AddCountryDetails() gin.HandlerFunc {
 
 func InsertCountryDetailsInDB(country_name string, currency_name string, currency_symbol string) (id int64) {
 	godotenv.Load()
-	client, _, _, _ := database.Mongoconnect(os.Getenv("MONGODB_HOST"))
-	fmt.Println(os.Getenv("APP_NAME"))
-	collection := client.Database("india").Collection("country")
-	doc_c := models.Destination{CountryName: country_name, CurrencyName: currency_name, CurrencySymbol: currency_symbol}
+	client, _, _, _ := database.Mongoconnect(os.Getenv("MONGODB_HOST"))                                            // connecting mongodb
+	fmt.Println(os.Getenv("APP_NAME"))                                                                             //  printing the value of app_name
+	collection := client.Database("india").Collection("country")                                                   //function inserts the doc document into the "country" collection of the "india" database using
+	doc := models.Country{CountryName: country_name, CurrencyName: currency_name, CurrencySymbol: currency_symbol} // coonecting/calling struct calls Destinations.
 
-	pattern_c := regexp.MustCompile("^[a-zA-Z]*$")
+	pattern := regexp.MustCompile("^[a-zA-Z]*$") // regexp is a package for writing regular expression  Regular expressions are commonly used to search for specific patterns in text, to validate user input
 
-	validate := validator.New()
-	err := validate.Struct(doc_c)
-	//fmt.Println(err)
+	validate := validator.New() // function creates a new validator ,  which is used to validate structs and fields based on tags.
+	err := validate.Struct(doc) // The validate.Struct(doc) function validates the doc struct using the tags defined on its fields. It returns an error if any of the fields fail validation.
+	//controller.ErrorLogger.Println("Something is Missing", err)
+	//controller.ReadFileError()
 	// 	var a = 2
+	//fmt.Println("error is **************", err)
 	if err != nil {
-		for _, err := range err.(validator.ValidationErrors) {
-			fmt.Println(err.Field(), err.Tag())
+		for _, err := range err.(validator.ValidationErrors) { // ValidationErrors is an array of FieldError's for use in custom error messages post validation.
+			controller.ErrorLogger.Println("Validation Error", err.Field(), err.Tag())
+			controller.ReadFileError()
 		}
-	} else if pattern_c.MatchString(doc_c.CountryName) && pattern_c.MatchString(doc_c.CurrencyName) && pattern_c.MatchString(doc_c.CurrencySymbol) {
-		CountryCount := CheckCountryExist(country_name)
+	} else if pattern.MatchString(doc.CountryName) && pattern.MatchString(doc.CurrencyName) && pattern.MatchString(doc.CurrencySymbol) {
+		CountryCount := CheckCountryExist(country_name) // function calls the CheckCountryExist() function to check if the country already exists in the database.
 		fmt.Println(CountryCount)
 		if CountryCount == 0 {
-			res, errr := collection.InsertOne(context.Background(), doc_c)
+			res, errr := collection.InsertOne(context.Background(), doc)
 			//fmt.Println(res)
 			if errr != nil {
-				log.Fatal(errr)
+				controller.ErrorLogger.Fatal("invalid input", errr) // function is called to log the error and terminate the program
+				controller.ReadFileError()
 			}
-			idd_c := res.InsertedID
-			fmt.Println("datatype", reflect.TypeOf(idd_c))
-			fmt.Println("inserted-Destinationid  ", idd_c)
+			idd := res.InsertedID
+			fmt.Println("datatype", reflect.TypeOf(idd)) //check the data type
+			fmt.Println("country inserted", idd)
+			controller.InfoLogger.Println("inserted-Destinationid") // for displaying information about the inserted document to the user.
+			controller.ReadFileInfo()
 		} else {
-			fmt.Println("Country Already Exist")
+			controller.WarningLogger.Println("Country Already Exist")
+			controller.ReadFileWarning()
 		}
 	} else {
-		fmt.Println("invalid input")
+		controller.WarningLogger.Println("invalid input")
+		controller.ReadFileWarning()
 	}
 
-	fmt.Println(os.Getenv("APP_NAME"))
+	controller.InfoLogger.Println(os.Getenv("APP_NAME"))
+	controller.ReadFileInfo()
 	return
 
 }
@@ -77,10 +89,11 @@ func CheckCountryExist(country_name_a string) (counts int64) {
 	fmt.Println(os.Getenv("APP_NAME"))
 	collection := client.Database("india").Collection("country")
 	//filter := bson.D{{"country_name" ,country_name_a}}
-
-	res, err := collection.CountDocuments(context.Background(), bson.M{"country_name": country_name_a})
+	res, err := collection.CountDocuments(context.Background(), bson.M{"country_name": country_name_a}) // binary-encoded serialization format that is used to store and exchange documents in MongoDB
 	if err != nil {
-		fmt.Println(err)
+		controller.ErrorLogger.Println("Country Doesn't Exist", err)
+		controller.ReadFileError()
+
 	}
 
 	return res
@@ -111,7 +124,8 @@ func InsertStateDetailsInDB(state_name string, state_language string) (id int64)
 
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
-			fmt.Println(err.Field(), err.Tag())
+			controller.ErrorLogger.Fatal("Validation Error", err.Field(), err.Tag())
+			controller.ReadFileError()
 		}
 
 	} else if pattern.MatchString(doc.StateName) && pattern.MatchString(doc.StateLanguage) {
@@ -119,19 +133,24 @@ func InsertStateDetailsInDB(state_name string, state_language string) (id int64)
 		if StateCount == 0 {
 			res, errr := collection.InsertOne(context.Background(), doc)
 			if errr != nil {
-				log.Fatal(errr)
+				controller.ErrorLogger.Fatal("Invalid Input", errr)
+				controller.ReadFileError()
 			}
 			idd := res.InsertedID
 			fmt.Println("datatype", reflect.TypeOf(idd))
-			fmt.Println("Inserted-State", idd)
+			controller.InfoLogger.Println("Inserted-State")
+			controller.ReadFileInfo()
 		} else {
-			fmt.Println("State Already Exist")
+			controller.WarningLogger.Println("State Already Exist")
+			controller.ReadFileWarning()
 		}
 	} else {
-		fmt.Println("Invalid Input")
+		controller.WarningLogger.Println("Invalid Input")
+		controller.ReadFileWarning()
 	}
 
-	fmt.Println(os.Getenv("APP_NAME"))
+	controller.InfoLogger.Println(os.Getenv("APP_NAME"))
+	controller.ReadFileInfo()
 	return
 
 }
@@ -141,9 +160,10 @@ func CheckStateExist(state_name string) (counts int64) {
 	fmt.Println(os.Getenv("APP_NAME"))
 	collection := client.Database("india").Collection("state")
 
-	res, err := collection.CountDocuments(context.Background(), bson.M{"state_name": state_name})
+	res, err := collection.CountDocuments(context.Background(), bson.M{"state_name": state_name}) //
 	if err != nil {
-		fmt.Println(err)
+		controller.ErrorLogger.Println("Country Doesn't Exist", err)
+		controller.ReadFileError()
 	}
 	return res
 }
@@ -176,7 +196,8 @@ func InsertCityDetailsInDB(city_name string) (id int64) {
 	// 	var a = 2
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
-			fmt.Println(err.Field(), err.Tag())
+			controller.ErrorLogger.Fatal("Validation Error", err.Field(), err.Tag())
+			controller.ReadFileError()
 		}
 	} else if pattern.MatchString(doc.CityName) {
 		CityCount := CheckCityExist(city_name)
@@ -185,20 +206,59 @@ func InsertCityDetailsInDB(city_name string) (id int64) {
 			res, errr := collection.InsertOne(context.Background(), doc)
 			//fmt.Println(res)
 			if errr != nil {
-				log.Fatal(errr)
+				controller.ErrorLogger.Fatal("Invalid Input", errr)
+				controller.ReadFileError()
 			}
 			idd_c := res.InsertedID
 			fmt.Println("datatype", reflect.TypeOf(idd_c))
-			fmt.Println("inserted-Destinationid  ", idd_c)
+			controller.InfoLogger.Println("inserted-Destinationid")
+			controller.ReadFileInfo()
 		} else {
-			fmt.Println("Country Already Exist")
+			controller.WarningLogger.Println("City Already Exist")
+			controller.ReadFileWarning()
 		}
 	} else {
-		fmt.Println("invalid input")
+		controller.WarningLogger.Println("invalid input")
+		controller.ReadFileWarning()
 	}
 
-	fmt.Println(os.Getenv("APP_NAME"))
+	controller.InfoLogger.Println(os.Getenv("APP_NAME"))
+	controller.ReadFileInfo()
 	return
+
+}
+
+// creating city Get function
+func SelectCityindatabase() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		godotenv.Load()
+		client, ctx, cancel, _ := database.Mongoconnect(os.Getenv("MONGODB_HOST"))
+		fmt.Println(os.Getenv("APP_NAME"))
+		collection := client.Database("MONGODB_NAME_LOCATION").Collection("city")
+		//doc := models.City{CityName: city_name}
+		cursor, err := collection.Find(ctx, bson.M{})
+		if err != nil {
+			controller.ErrorLogger.Println("City Doesn't Exist", err)
+			controller.ReadFileError()
+		}
+		var city []bson.M
+		if err = cursor.All(ctx, &city); err != nil {
+			log.Println(err)
+		}
+		fmt.Println()
+		//fmt.Println("datatype", reflect.TypeOf(building))
+		//fmt.Println("cities\n", building)
+		//fmt.Println("****************************************************")
+		// for i := range city {
+		// 	fmt.Println(city[i]["city_name"])
+		// }
+
+		//fmt.Println("selected city-----\n", building[0]["city_name"])
+		//fmt.Println("****************************************************")
+		database.Mongoclose(client, ctx, cancel)
+		fmt.Println(city)
+		c.IndentedJSON(200, city)
+	}
 
 }
 
@@ -210,7 +270,9 @@ func CheckCityExist(country_name_a string) (counts int64) {
 
 	res, err := collection.CountDocuments(context.Background(), bson.M{"country_name": country_name_a})
 	if err != nil {
-		fmt.Println(err)
+		controller.ErrorLogger.Println("Country Doesn't Exist", err)
+		controller.ReadFileError()
+
 	}
 
 	return res
@@ -241,7 +303,8 @@ func InsertLocalityDetailsInDB(locality_name string) (id int64) {
 
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
-			fmt.Println(err.Field(), err.Tag())
+			controller.ErrorLogger.Fatal("Validation Error", err.Field(), err.Tag())
+			controller.ReadFileError()
 		}
 	} else if pattern.MatchString(doc.LocalityName) {
 		LocalityCount := CheckLocalityExist(locality_name)
@@ -249,18 +312,23 @@ func InsertLocalityDetailsInDB(locality_name string) (id int64) {
 		if LocalityCount == 0 {
 			res, errr := collection.InsertOne(context.Background(), doc)
 			if errr != nil {
-				log.Fatal(errr)
+				controller.ErrorLogger.Fatal("Invalid Input", errr)
+				controller.ReadFileError()
 			}
 			idd := res.InsertedID
 			fmt.Println("datatype", reflect.TypeOf(idd))
-			fmt.Println("Inserted-Localityid", idd)
+			controller.InfoLogger.Println("Inserted-Localityid")
+			controller.ReadFileInfo()
 		} else {
-			fmt.Println("Locality Name Already Exist")
+			controller.WarningLogger.Println("Locality Name Already Exist")
+			controller.ReadFileWarning()
 		}
 	} else {
-		fmt.Println("Invalid Input")
+		controller.WarningLogger.Println("Invalid Input")
+		controller.ReadFileWarning()
 	}
-	fmt.Println(os.Getenv("APP_NAME"))
+	controller.InfoLogger.Println(os.Getenv("APP_NAME"))
+	controller.ReadFileInfo()
 	return
 }
 
@@ -271,7 +339,8 @@ func CheckLocalityExist(locality_name string) (counts int64) {
 
 	res, err := collection.CountDocuments(context.Background(), bson.M{"locality_name": locality_name})
 	if err != nil {
-		fmt.Println(err)
+		controller.ErrorLogger.Println("Country Doesn't Exist", err)
+		controller.ReadFileError()
 	}
 	return res
 }

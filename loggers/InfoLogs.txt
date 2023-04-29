@@ -1,0 +1,41 @@
+INFO:2023/04/28 14:08:43 location.go:65: inserted-Destinationid   ObjectID("644b861377322280c00b1e72")
+INFO:2023/04/28 14:08:43 location.go:73: Commercial prop floor
+INFO:2023/04/28 15:16:02 D:/project-real/commercial/controller/commercial/manage_commercial/location.go:65: inserted-Destinationid   ObjectID("644b95dae01abf7b9dc7115b")
+INFO:2023/04/28 15:16:02 D:/project-real/commercial/controller/commercial/manage_commercial/location.go:73: Commercial propfloor
+INFO:2023/04/28 15:19:55 location.go:65: inserted-Destinationid   ObjectID("644b96c36896f8530b4dad28")
+INFO:2023/04/28 15:19:55 location.go:73: Commercial propfloor
+INFO:2023/04/28 15:43:14 location.go:65: inserted-Destinationid  
+INFO:2023/04/28 15:43:14 location.go:73: Commercial propfloor
+INFO:2023/04/28 15:55:05 location.go:66: inserted-Destinationid
+INFO:2023/04/28 15:55:05 location.go:74: Commercial propfloor
+INFO:2023/04/28 16:33:18 location.go:66: inserted-Destinationid
+INFO:2023/04/28 16:33:18 location.go:75: Commercial propfloor
+INFO:2023/04/28 16:35:49 location.go:66: inserted-Destinationid
+INFO:2023/04/28 16:35:49 location.go:75: Commercial propfloor
+INFO:2023/04/28 16:42:01 location.go:66: inserted-Destinationid
+INFO:2023/04/28 16:42:01 location.go:75: Commercial propfloor
+INFO:2023/04/28 16:47:12 location.go:66: inserted-Destinationid
+INFO:2023/04/28 16:47:12 location.go:75: Commercial propfloor
+WARNING 2023/04/28 16:52:39 location.go:72: invalid input
+INFO:2023/04/28 16:52:39 location.go:75: Commercial propfloor
+WARNING 2023/04/28 16:54:25 location.go:72: invalid input
+INFO:2023/04/28 16:54:25 location.go:75: Commercial propfloor
+INFO:2023/04/28 16:58:15 location.go:66: inserted-Destinationid
+INFO:2023/04/28 16:58:15 location.go:75: Commercial propfloor
+ERROR 2023/04/28 17:54:19 location.go:52: Validation ErrorCurrencyNamerequired
+ERROR 2023/04/28 18:00:49 location.go:48: Key: 'Country.CurrencyName' Error:Field validation for 'CurrencyName' failed on the 'required' tag
+ERROR 2023/04/28 18:00:49 location.go:53: Validation ErrorCurrencyNamerequired
+ERROR 2023/04/28 18:03:33 location.go:48: Something Went Wrong Key: 'Country.CurrencyName' Error:Field validation for 'CurrencyName' failed on the 'required' tag
+ERROR 2023/04/28 18:03:33 location.go:53: Validation ErrorCurrencyNamerequired
+ERROR 2023/04/28 18:21:41 location.go:54: Validation ErrorCurrencyNamerequired
+ERROR 2023/04/28 18:23:31 location.go:55: Validation ErrorCurrencyNamerequired
+ERROR 2023/04/28 18:25:51 location.go:55: Validation Error CurrencyName required
+INFO:2023/04/28 18:25:51 location.go:81: Commercial propfloor
+INFO:2023/04/28 18:35:17 location.go:81: Commercial propfloor
+INFO:2023/04/28 18:39:18 location.go:81: Commercial propfloor
+INFO:2023/04/28 18:47:28 location.go:81: Commercial propfloor
+INFO:2023/04/28 18:53:21 location.go:81: Commercial propfloor
+INFO:2023/04/29 11:11:31 location.go:81: Commercial propfloor
+INFO:2023/04/29 11:35:07 location.go:70: inserted-Destinationid
+INFO:2023/04/29 11:35:07 location.go:81: Commercial propfloor
+INFO:2023/04/29 11:36:15 location.go:81: Commercial propfloor

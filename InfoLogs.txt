@@ -1,0 +1,13 @@
+INFO:2023/04/27 13:48:59 location.go:91: inserted-Destinationid   ObjectID("644a2ff27dc0920ee503cbde")
+INFO:2023/04/27 17:31:37 location.go:92: inserted-Destinationid   ObjectID("644a64214e4437f4e63cd972")
+INFO:2023/04/27 17:31:38 location.go:100: Commercial prop floor
+INFO:2023/04/27 17:39:46 location.go:156: Inserted-State ObjectID("644a660a63808b9790ee87db")
+INFO:2023/04/27 17:39:46 location.go:164: Commercial prop floor
+INFO:2023/04/27 17:42:35 location.go:222: inserted-Destinationid   ObjectID("644a66b3588c22ac41fc8ab6")
+INFO:2023/04/27 17:47:41 location.go:319: Inserted-Localityid ObjectID("644a67e5d3c5516b281f8df2")
+ERROR 2023/04/28 13:51:50 location.go:51: Validation Error CurrencySymbol required
+INFO:2023/04/28 13:51:50 location.go:72: Commercial prop floor
+ERROR 2023/04/28 13:59:42 location.go:52: Validation Error CurrencySymbol required
+INFO:2023/04/28 13:59:42 location.go:73: Commercial prop floor
+INFO:2023/04/28 14:01:41 location.go:65: inserted-Destinationid   ObjectID("644b846deb78fb9f5f7135b1")
+INFO:2023/04/28 14:01:41 location.go:73: Commercial prop floor

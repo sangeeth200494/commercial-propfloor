@@ -1,7 +1,5 @@
 package models
 
-//import ("regexp")
-
 type Property struct {
 	Name             string `bson:"name" validate:"required"`
 	Location         string `bson:"location" validate:"required"`
@@ -15,7 +13,7 @@ type Property struct {
 	OverLooking      string `bson:"overlooking" validate:"required"`
 }
 
-type Destination struct {
+type Country struct {
 	CountryName    string `bson:"country_name"  validate:"required"`
 	CurrencyName   string `bson:"currency_name"  validate:"required"`
 	CurrencySymbol string `bson:"currency_symbol"  validate:"required"`

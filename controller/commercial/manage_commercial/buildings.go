@@ -1,11 +1,11 @@
 package manage_commercial
 
 import (
+	"commercial-propfloor/controller"
 	"commercial-propfloor/database"
 	"commercial-propfloor/models"
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"regexp"
 
@@ -47,19 +47,24 @@ func InsertBasicBuildingDetailInDB(name string, location string, availability_fo
 	err := validate.Struct(doc)
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
-			fmt.Println(err.Field(), err.Tag())
+			controller.ErrorLogger.Println("Validation Error", err.Field(), err.Tag())
+			controller.ReadFileError()
 		}
 	} else if pattern2.MatchString(doc.Floors) && pattern.MatchString(doc.Name) && pattern.MatchString(doc.AvailabilityFor) && pattern.MatchString(doc.Location) && pattern.MatchString(doc.CompletionStatus) && pattern.MatchString(doc.FurnishingStatus) && pattern.MatchString(doc.Parking) && pattern.MatchString(doc.Lift) && pattern.MatchString(doc.Oc) && pattern.MatchString(doc.OverLooking) {
 		res, errr := collection.InsertOne(context.Background(), doc)
 		if errr != nil {
-			log.Fatal(errr)
+			controller.ErrorLogger.Fatal("Invalid Input", errr)
+			controller.ReadFileError()
 		}
 		idd := res.InsertedID
 		fmt.Println("datatype", reflect.TypeOf(idd))
-		fmt.Println("inserted-cityid  ", idd)
+		controller.InfoLogger.Println("inserted-Buildingid  ", idd)
+		controller.ReadFileInfo()
 	} else {
-		fmt.Println("invalid input")
+		controller.WarningLogger.Println("invalid input")
+		controller.ReadFileWarning()
 	}
-	fmt.Println(os.Getenv("APP_NAME"))
+	controller.InfoLogger.Println(os.Getenv("APP_NAME"))
+	controller.ReadFileInfo()
 	return
 }

@@ -1,0 +1,1 @@
+ERROR 2023/04/28 18:35:17 location.go:55: Validation Error CurrencyName required

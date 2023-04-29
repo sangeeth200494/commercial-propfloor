@@ -3,16 +3,14 @@ package main
 import (
 	"commercial-propfloor/routes"
 	"log"
-	"os"
+
+	// "os"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8099"
-	}
+	port := "8099"
 
 	router := gin.New()
 	router.Use(gin.Logger())

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+
+
+
+    <title>template in</title>
+</head>
+<body>
+    <div include-header="header" id="header"></div>
+    <div include-components="home" id="home"></div>
+    <div include-components="floorplan" id="floorplan"></div>
+    <div include-components="nearest" id="nearest"></div>
+    <div include-components="location" id="location"></div>
+    <div include-components="professional" id="professional"></div>
+    <div include-components="tags" id="tags"></div>
+    <div include-footer="footer" id="footer"></div>
+    
+    
+    
+    
+</body>
+
+
+<script>
+    $(function () {
+              var includes = $('[include-header]')
+              var i=0
+              $.each(includes, function () {
+                console.log(includes[i].attributes[i].nodeValue + i)
+                var file = '/views/commercial-propfloor/header/' + includes[i].attributes[i].nodeValue + '.html'
+                $(this).load(file)
+                i++
+              })
+            })
+         $(function () {
+              var includes = $('[include-components]')
+              var i=0
+              $.each(includes, function () {
+                var id = $(this).attr('id')
+                console.log(id)
+                var file = '/views/commercial-propfloor/CommercialBuilding/components/' + id + '.html'
+                $(this).load(file)
+                i++
+              })
+            })
+
+            $(function () {
+              var includes = $('[include-footer]')
+              var i=0
+              $.each(includes, function () {
+                console.log(includes[i].attributes[i].nodeValue + i)
+                var file = '/views/commercial-propfloor/footer/' + includes[i].attributes[i].nodeValue + '.html'
+                $(this).load(file)
+                i++
+              })
+            })
+</script>
+</html>

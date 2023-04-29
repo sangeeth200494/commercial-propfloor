@@ -1,0 +1,415 @@
+head {
+    display: none;
+}
+body{
+    display: block;
+}
+
+div{
+    display: block;
+}
+
+.row{
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-top: 1px;
+    display: fix;
+    flex-wrap: wrap;
+}
+.ProjectNameTitle h1{
+    display: block;  
+    font-size: 27px;
+    margin-bottom: 29px;
+    margin-top: 24px;
+    font-weight: 700;
+    margin-left: -21px;
+}
+p{  
+    display: block;
+    margin-bottom: 29px;
+    margin-top: -6px;
+    font-weight: 500;
+    margin-left: -20px
+}
+.ProjectOverviewDetails{
+    display: block;
+    width: 100%;
+    margin-left: 6px;
+    margin-top: -32px;
+}
+
+.ProjectOverviewDetails ul li {
+    display: block;
+    width: 50%;
+    float: left;
+    padding: 14px 0 0 0;
+    
+}
+.ProjectOverviewDetails ul li small {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    color: black;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    
+}
+.ProjectOverviewDetails ul li span {
+    display: block;
+    width: 100%;
+    font-size: 17px;
+    color:#454444;
+    line-height: 34px;
+    font-weight: 400;
+    font-family: Roboto;
+    position: relative;
+}
+
+.location-link:hover {
+    color:orange !important;
+}
+h3 {
+    display: block;
+    font-size: 0.99em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    width: 100%;
+}
+hr {
+    display: block;
+    margin-top: 23px;
+    margin-bottom: 35px;
+    border: -0.5;
+    border-top: 1px solid #eee;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+}
+.Discription p{
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+    line-height: 22px;
+    padding-top: 5px;
+}
+.nearby-edit{
+    display: block;
+    width: 100%;
+    font-weight: 700;
+    width: 100%;
+    font-size: 17px;
+    text-decoration-line: underline;
+}
+.nearby-category{ 
+    display: block;
+    margin-left: -17px;
+    margin-right: 40px;
+    height: 125px;
+
+}
+.bi{
+    
+    font-weight: 900;
+}
+.nearby.box{
+    margin: 20px 0px -27px 0px;
+}
+.SearchBox{ 
+display: block;
+height: 48px;
+margin: 9px 0;
+padding: 0 0 0 16%;
+background: #fff;
+border-radius: 3px;
+position: relative;
+max-width: 558px;
+}
+#button1{
+  display: block;
+  position: relative;
+  width: 139px;
+  height: 48px;
+  border-radius: 5px;
+  background: rgb(255 153 0);
+  color: black;
+  border: none;
+  margin-left: -10px
+}
+.img{
+  display: block;
+  position: relative;
+  top: 3px;
+}
+#list{
+  display: block;
+  color: white;
+  font-size: 29px;  
+  position: relative;  
+  top: 10px;
+  left: 10px;
+}
+#location{
+  display: block;
+  position: relative;
+  right: 10px;
+}
+.searchinput{
+  display: block;
+  outline: 0;
+  margin: 13px 27px 16px 18px;
+  width: 68%;
+  font-size: 15px;
+  border: none;
+  position: relative;
+  bottom: 1px;
+  left: 15px;
+}
+.searchicon{
+  display: block;
+  background-color: rgb(255 153 0);
+  position: relative;
+  height: 99%;
+  width: 47px;
+  margin-bottom: 8px;
+  bottom: 101px;
+  left: 420px;
+  font-size: 25px;
+  padding-left: 10px;
+  border-radius: 5px;
+}
+#maindrop1 {
+  display: block;
+  position: relative;
+  display: inline-block;
+  right: 103px;
+}
+#drop1 a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+  position: relative;
+  padding-left: 4px
+}
+#drop1{
+  display: none;
+  position: absolute;
+  min-width: 133px;
+  background-color: white;
+  border:solid 1px orange;    
+}
+#drop1 a:hover {
+  background-color: orange; color : white
+} 
+#maindrop1:hover #drop1{
+  display: block;
+}
+
+#maindrop2{
+  position: relative;
+  font-size: 39px;
+  color: white;
+  right: 44px;
+}
+ 
+#drop2 a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  font-size: 20px;
+  padding-left: 4px
+}
+#maindrop2 {
+  position: relative;
+  display: inline-block;
+}
+#drop2 {
+  display: none;
+  position: absolute;
+  min-width: 170px;
+  background-color: white;
+  border:solid 1px orange; 
+}
+  
+#drop2 a:hover {
+  background-color:orange;color: white;
+} 
+#maindrop2:hover #drop2{
+  display: block;
+}
+
+.searchfield{
+  position: relative;
+  top: -50px;
+  width: 378px;
+  left: 28px;
+  position: relative;
+  display: inline-block;
+}
+
+.hide {
+  position: absolute;
+  width: 370px;
+  height: 150px;
+  background-color: rgb(235, 181, 181);
+  border-color: orange;
+  top: 60px;
+    
+}
+.hide a{
+  color: black;
+  /* padding: 1px 1px;  */
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.myDIV:hover + .hide {
+  display:inline-block;
+  position: relative;
+    
+}
+.Ask{
+    width: 94%;
+    height: 460px;
+    border: solid;
+    border-color: red;
+    border-width: 1px;
+    background-color: white;
+}
+#ask-words{
+    margin-top: -75px;
+    margin-bottom: 1rem;
+    padding-left: 188px;
+    position: relative;
+    padding-right: 70px;
+    color: black;
+    letter-spacing: -0.2px;
+    font-size: 16px;
+    font-weight: 400;
+}
+#ask-photo{
+    position: relative;
+    top: 31px;
+    left: 20px;
+}
+#Questions{
+   width: 94%; 
+   height: 100px;
+   border: solid;
+   border-color: red;
+   border-width: 1px;
+   background-color: white;
+}
+.what{
+    width: 94%; 
+    height: 100px;
+    border: solid;
+    border-color: red;
+    border-width: 1px;
+    background-color: white;
+}
+#where{
+    width: 94%; 
+    height: 110px;
+    border: solid;
+    border-color: red;
+    border-width: 1px;
+    background-color: white; 
+}
+.form{
+    position: relative;
+    background-color:white;
+    width: 96%;
+    height: 450px;
+    border: solid;
+    left: 20px;
+    border-color: whitesmoke;
+    top: 20px;
+    box-shadow: 16px,16px,16px,16px;
+    border-width: 1px;
+    border-radius: 8px;
+}
+#form-head{
+    text-decoration: none;
+    text-align: center;
+    /* border-bottom: solid; */
+    border-spacing: 20px;
+    margin-left: 17px;
+    margin-right: 26PX;
+    /* border-inline-width: 29px; */
+    border-width: 1px;
+    padding-bottom: 25px;
+    
+    
+
+}
+.image-logo{
+    
+    
+    
+    width: 86%;
+    height: 110px;
+    background-color: white;
+    border: solid;
+    border-radius: 14px;
+    border-color: beige;
+    position: relative;
+    left: 30px;
+}
+#name{
+   
+    width: 86%;
+    position: relative;
+    left: 30px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 8px;
+    padding-left: 4px;
+    border-width: 1px;
+}
+#email{
+    width: 86%;
+    position: relative;
+    left: 30px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 8px; 
+    padding-left: 4px;
+    border-width: 1px;
+}
+#phone{
+    width: 86%;
+    position: relative;
+    left: 30px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 8px; 
+    padding-left: 4px;  
+    border-width: 1px;
+}
+#Enquire-button{
+    width: 86%;
+    border-radius: 8px;
+    border: none;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    left: 30px;
+    position: relative;
+    background-color: orange;
+    
+
+}
+#category-list{
+    position: relative;
+    left: 99px;
+    bottom: 94px;
+    list-style: none;
+}
